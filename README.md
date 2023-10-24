@@ -7,3 +7,11 @@ for example:
 ```md
 @import "src/1.go"
 ```
+
+## use in book.json
+
+```json
+{
+  "plugins": ["a-import"]
+}
+```

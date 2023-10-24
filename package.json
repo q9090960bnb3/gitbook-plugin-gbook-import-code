@@ -1,17 +1,12 @@
 {
   "name": "gitbook-plugin-a-import",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "support @import",
   "engines": {
     "gitbook": "*"
   },
-  "gitbook": {
-    "properties": {
-      "myConfigKey": {
-        "type": "string",
-        "default": "it's the default value",
-        "description": "It defines my awesome config!"
-      }
-    }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gofulljs/gitbook-plugin-a-import"
   }
 }
