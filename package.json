@@ -1,12 +1,13 @@
 {
   "name": "gitbook-plugin-a-import",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "main": "index.js",
   "description": "support @import",
   "engines": {
     "gitbook": "*"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gofulljs/gitbook-plugin-a-import"
+    "url": "https://github.com/gofulljs/gitbook-plugin-a-import"
   }
 }
