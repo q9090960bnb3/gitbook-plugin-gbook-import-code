@@ -1,5 +1,5 @@
 {
-  "name": "gitbook-plugin-a-import",
+  "name": "gitbook-plugin-gbook-import-code",
   "version": "0.0.3",
   "main": "index.js",
   "description": "support @import",
@@ -8,6 +8,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gofulljs/gitbook-plugin-a-import"
+    "url": "https://github.com/q9090960bnb3/gitbook-plugin-gbook-import-code"
   }
 }

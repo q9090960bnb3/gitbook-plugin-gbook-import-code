@@ -11,16 +11,25 @@ function replaceContent(rawPath, textData) {
     if (lines[i].includes("@import")) {
       const filePath = lines[i].match(/@import "([^"]+)"/);
       if (filePath) {
-        const importPath = PathUtil.isAbsolute(filePath[1])
-          ? filePath[1]
-          : rawPath + "/" + filePath[1];
 
-        const extName = PathUtil.extname(importPath).slice(1);
+        const importPath = PathUtil.isAbsolute(filePath[1])
+        ? filePath[1]
+        : rawPath + "/" + filePath[1];
+
+        var extName = PathUtil.extname(importPath).slice(1); 
+        const res = lines[i].match(/@import "([^"]+)" {(.+)}/);
+        if (res){
+          extName = res[2]
+        }
+
         // console.info("path: ", importPath, "extName: ", extName);
 
         // 读取文件内容
         try {
-          const fileContent = fs.readFileSync(importPath, "utf8");
+          var fileContent = fs.readFileSync(importPath, "utf8");
+          if (!fileContent.endsWith("\n")){
+            fileContent += "\n"
+          }
           // 替换@import行为文件内容
           lines[i] = "```" + extName + "\n" + fileContent + "```\n";
         } catch (err) {
