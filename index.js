@@ -2,7 +2,7 @@ const fs = require("fs");
 const PathUtil = require("path");
 
 function getInfo(str) {
-  if (/^\w$/.test(str)) {
+  if (/^\w+$/.test(str)) {
     return {
       lang: str
     }
