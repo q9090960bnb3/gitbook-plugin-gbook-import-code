@@ -1,11 +1,16 @@
 {
   "name": "gitbook-plugin-gbook-import-code",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "description": "support @import",
   "engines": {
     "gitbook": "*"
   },
+  "keywords": [
+    "import",
+    "import-code",
+    "gbook"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/q9090960bnb3/gitbook-plugin-gbook-import-code"
