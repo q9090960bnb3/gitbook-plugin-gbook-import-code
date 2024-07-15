@@ -4,7 +4,8 @@ const PathUtil = require("path");
 function getInfo(str) {
   if (/^\w+$/.test(str)) {
     return {
-      lang: str
+      lang: str,
+      dbe: false // double braces escape
     }
   }
 
@@ -24,18 +25,20 @@ function replaceContent(rawPath, textData) {
       const res = lines[i].match(/@import "([^"]+)"[ \t]*(?:{(.+)})?/)
       if (res) {
         const importPath = PathUtil.isAbsolute(res[1])
-        ? res[1]
-        : rawPath + "/" + res[1];
+          ? res[1]
+          : rawPath + "/" + res[1];
 
         let extName = PathUtil.extname(importPath).slice(1);
         let otherInfo = ""
-        if (res[2]){
+        let dbe = false
+        if (res[2]) {
           // console.log('res2:', res[2])
           const info = getInfo(res[2])
           if (info.lang) {
             extName = info.ext
           }
-          otherInfo = JSON.stringify(info)
+          if (info.braces)
+            otherInfo = JSON.stringify(info)
         }
 
         // console.info("path: ", importPath, "extName: ", extName);
@@ -43,7 +46,15 @@ function replaceContent(rawPath, textData) {
         // 读取文件内容
         try {
           var fileContent = fs.readFileSync(importPath, "utf8");
-          if (!fileContent.endsWith("\n")){
+
+          if (!fileContent.endsWith("\n")) {
+
+            if (dbe) {
+              fileContent = fileContent.replace(/\{\{/, "\\{\\{")
+              fileContent = fileContent.replace(/\}\}/, "\\}\\}")
+            }
+
+            // fileContent = encodeURIComponent(fileContent)
             fileContent += "\n"
           }
           // 替换@import行为文件内容

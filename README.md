@@ -27,6 +27,7 @@ or
 ```md
 @import "src/1.js" {title: 'demo', group: 'group01'}
 @import "src/2.js" {group: 'group01'}
+@import "src/1.html" {dbe: true}
 ```
 
 ## use in book.json
