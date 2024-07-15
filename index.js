@@ -37,8 +37,10 @@ function replaceContent(rawPath, textData) {
           if (info.lang) {
             extName = info.ext
           }
-          if (info.braces)
-            otherInfo = JSON.stringify(info)
+          if (info.dbe){
+            dbe = true
+          }
+          otherInfo = JSON.stringify(info)
         }
 
         // console.info("path: ", importPath, "extName: ", extName);
