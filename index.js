@@ -52,8 +52,8 @@ function replaceContent(rawPath, textData) {
           if (!fileContent.endsWith("\n")) {
 
             if (dbe) {
-              fileContent = fileContent.replace(/\{\{/, "\\{\\{")
-              fileContent = fileContent.replace(/\}\}/, "\\}\\}")
+              fileContent = fileContent.replace(/\{\{/g, "\\{\\{")
+              fileContent = fileContent.replace(/\}\}/g, "\\}\\}")
             }
 
             // fileContent = encodeURIComponent(fileContent)
