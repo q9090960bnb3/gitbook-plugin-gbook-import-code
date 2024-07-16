@@ -22,7 +22,7 @@ function replaceContent(rawPath, textData) {
 
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].includes("@import")) {
-      const res = lines[i].match(/@import "([^"]+)"[ \t]*(?:"{(.+)}")?/)
+      const res = lines[i].match(/@import "([^"]+)"[ \t]*(?:{(.+)})?/)
       if (res) {
         const importPath = PathUtil.isAbsolute(res[1])
           ? res[1]
@@ -58,10 +58,6 @@ function replaceContent(rawPath, textData) {
 
             // fileContent = encodeURIComponent(fileContent)
             fileContent += "\n"
-          }
-          
-          if (otherInfo) {
-            otherInfo = '"' + otherInfo + '"'
           }
 
           // 替换@import行为文件内容
