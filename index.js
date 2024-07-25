@@ -14,6 +14,12 @@ function getInfo(str) {
   return JSON.parse("{" + validStr + "}")
 }
 
+/**
+ * 
+ * @param {string} rawPath 
+ * @param {string} textData 
+ * @returns 
+ */
 function replaceContent(rawPath, textData) {
   // 将文本数据分割成行
   const lines = textData.split("\n");
@@ -21,7 +27,7 @@ function replaceContent(rawPath, textData) {
   rawPath = PathUtil.dirname(rawPath);
 
   for (let i = 0; i < lines.length; i++) {
-    if (lines[i].includes("@import")) {
+    if (lines[i].startsWith("@import")) {
       const res = lines[i].match(/@import "([^"]+)"[ \t]*(?:{(.+)})?/)
       if (res) {
         const importPath = PathUtil.isAbsolute(res[1])
@@ -35,7 +41,7 @@ function replaceContent(rawPath, textData) {
           // console.log('res2:', res[2])
           const info = getInfo(res[2])
           if (info.lang) {
-            extName = info.ext
+            extName = info.lang
           }
           if (info.dbe){
             dbe = true
@@ -51,18 +57,17 @@ function replaceContent(rawPath, textData) {
 
           if (!fileContent.endsWith("\n")) {
 
-            if (dbe) {
-              fileContent = fileContent.replace(/\{\{/g, "\\{\\{")
-              fileContent = fileContent.replace(/\}\}/g, "\\}\\}")
-            }
-
             // fileContent = encodeURIComponent(fileContent)
             fileContent += "\n"
           }
 
           // 替换@import行为文件内容
-          lines[i] = "```" + extName + " " + otherInfo + "\n" + fileContent + "```\n";
-          // console.log('line:', lines[i])
+          let line = "```" + extName + " " + otherInfo + "\n" + fileContent + "```\n";
+          if (dbe) {
+            line = `{% raw %}\n${line}{% endraw %}\n`
+          }
+          lines[i] = line
+          // console.log('lines:', lines[i])
         } catch (err) {
           console.error(`无法读取文件: ${err}`);
         }
